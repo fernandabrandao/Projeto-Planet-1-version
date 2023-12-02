@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Project Planet</title>
+</head>
+
+<style>
+body {
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #121215;
+}
+
+.sistema-solar {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Algumas regras de posicionamento que são comuns para todos os objetos */
+.orbita {
+  border: 1px dashed #666;
+}
+
+#sol,
+.orbita,
+.orbita + div,
+.orbita + div > div {
+  position: absolute;
+}
+
+#sol,
+.orbita,
+.orbita + div {
+  top: 50%;
+  left: 50%;
+}
+.orbita + div > div {
+  top: 0;
+  left: 50%;
+}
+
+.orbita,
+.orbita + div div,
+#terra {
+  border-radius: 50%;
+}
+
+/* Regras de objetos individuais. Eles são praticamente os mesmos para todos os objetos e basicamente variam apenas no tamanho da órbita, tamanho do planeta e cores */
+
+#sol {
+  height: 200px;
+  width: 200px;
+  background-color: #fae20a;
+  margin-top: -100px;
+  margin-left: -100px;
+  border-radius: 50%;
+  box-shadow: 0 0 84px orange;
+}
+
+#mercurio {
+  height: 25px;
+  width: 25px;
+  background-color: #86807a;
+  margin-top: -13.5px;
+  margin-left: -13.5px;
+}
+.mercurio-orbita,
+.mercurio-rodar {
+  width: 280px;
+  height: 280px;
+  margin-left: -140px;
+  margin-top: -140px;
+}
+
+#venus {
+  height: 40px;
+  width: 40px;
+  background-color: #c54f28;
+  margin-top: -20px;
+  margin-left: -20px;
+  box-shadow: 0 0 34px #933313;
+}
+.venus-orbita,
+.venus-rodar {
+  width: 370px;
+  height: 370px;
+  margin-left: -185px;
+  margin-top: -185px;
+}
+
+#terra {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  height: 50px;
+  width: 50px;
+  margin-left: -25px;
+  margin-top: -25px;
+  border-radius: 50%;
+  box-shadow: 0 0 34px #3a4385;
+}
+.terra-orbita,
+.terra-rodar {
+  width: 500px;
+  height: 500px;
+  margin-left: -250px;
+  margin-top: -250px;
+}
+
+#lua {
+  height: 12px;
+  width: 12px;
+  border-radius: 50%;
+  background: white;
+  margin-top: -6px;
+  margin-left: -6px;
+  box-shadow: 0 0 14px #3a4385;
+}
+.lua-orbita,
+.lua-rodar {
+  height: 90px;
+  width: 90px;
+  margin-top: -45px;
+  margin-left: -45px;
+  border-color: #447;
+}
+
+#marte {
+  height: 32px;
+  width: 32px;
+  background-color: #863222;
+  margin-top: -16px;
+  margin-left: -16px;
+  box-shadow: 0 0 14px #a64232;
+}
+.marte-orbita,
+.marte-rodar {
+  width: 700px;
+  height: 700px;
+  margin-left: -350px;
+  margin-top: -350px;
+}
+
+#jupiter {
+  height: 70px;
+  width: 70px;
+  background-color: #8c7829;
+  margin-top: -35px;
+  margin-left: -35px;
+  box-shadow: 0 0 14px #76641b;
+}
+.jupiter-orbita,
+.jupiter-rodar {
+  width: 900px;
+  height: 900px;
+  margin-left: -450px;
+  margin-top: -450px;
+}
+
+#saturno {
+  height: 32px;
+  width: 32px;
+  background-color: #b9ac77;
+  margin-top: -16px;
+  margin-left: -16px;
+  box-shadow: 0 0 14px #b8a660;
+}
+.saturno-orbita,
+.saturno-rodar {
+  width: 1100px;
+  height: 1100px;
+  margin-left: -550px;
+  margin-top: -550px;
+}
+
+#urano {
+  height: 32px;
+  width: 32px;
+  background-color: #a4f0fe;
+  margin-top: -16px;
+  margin-left: -16px;
+  box-shadow: 0 0 14px #b3eef9;
+}
+.urano-orbita,
+.urano-rodar {
+  width: 1300px;
+  height: 1300px;
+  margin-left: -650px;
+  margin-top: -650px;
+}
+
+#netuno {
+  height: 32px;
+  width: 32px;
+  background-color: #3b21df;
+  margin-top: -16px;
+  margin-left: -16px;
+  box-shadow: 0 0 14px rgb(58, 30, 243);
+}
+.netuno-orbita,
+.netuno-rodar {
+  width: 1600px;
+  height: 1600px;
+  margin-left: -800px;
+  margin-top: -800px;
+}
+
+/* Animações giratórias */
+
+@-webkit-keyframes rodar-direita {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes rodar-direita {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.terra-rodar {
+  -webkit-animation: rodar-direita 24s linear infinite;
+          animation: rodar-direita 24s linear infinite;
+}
+.lua-rodar {
+  -webkit-animation: rodar-direita 24s linear infinite;
+          animation: rodar-direita 24s linear infinite;
+}
+.venus-rodar {
+  -webkit-animation: rodar-direita 140s linear infinite;
+          animation: rodar-direita 140s linear infinite;
+}
+.mercurio-rodar {
+  -webkit-animation: rodar-direita 100s linear infinite;
+          animation: rodar-direita 100s linear infinite;
+}
+.marte-rodar {
+  -webkit-animation: rodar-direita 25s linear infinite;
+          animation: rodar-direita 25s linear infinite;
+}
+.jupiter-rodar {
+  -webkit-animation: rodar-direita 10s linear infinite;
+          animation: rodar-direita 10s linear infinite;
+}
+.saturno-rodar {
+  -webkit-animation: rodar-direita 11s linear infinite;
+          animation: rodar-direita 11s linear infinite;
+}
+.urano-rodar {
+  -webkit-animation: rodar-direita 17s linear infinite;
+          animation: rodar-direita 17s linear infinite;
+}
+.netuno-rodar {
+  -webkit-animation: rodar-direita 16s linear infinite;
+          animation: rodar-direita 16s linear infinite;
+}
+
+
+</style>
+
+<body>
+
+<div class="sistema-solar">
+  <div id="sol"></div>
+
+  <div class="orbita mercurio-orbita"></div>
+  <div class="mercurio-rodar">
+    <div id="mercurio"></div>
+  </div>
+
+  <div class="orbita venus-orbita"></div>
+  <div class="venus-rodar">
+    <div id="venus"></div>
+  </div>
+
+  <div class="orbita terra-orbita"></div>
+  <div class="terra-rodar">
+    <div class="orbita lua-orbita"></div>
+    <div class="lua-rodar">
+      <div id="lua"></div>
+    </div>
+    <img id="terra" src="https://raw.githubusercontent.com/everdimension-personal/codepen-assets/master/earth_small_150.jpg" />
+  </div>
+
+  <div class="orbita marte-orbita"></div>
+  <div class="marte-rodar">
+    <div id="marte"></div>
+  </div>
+
+  <div class="orbita jupiter-orbita"></div>
+  <div class="jupiter-rodar">
+    <div id="jupiter"></div>
+  </div>
+
+  <div class="orbita saturno-orbita"></div>
+  <div class="saturno-rodar">
+    <div id="saturno"></div>
+  </div>
+
+  <div class="orbita urano-orbita"></div>
+  <div class="urano-rodar">
+    <div id="urano"></div>
+  </div>
+
+  <div class="orbita netuno-orbita"></div>
+  <div class="netuno-rodar">
+    <div id="netuno"></div>
+  </div>
+
+</div>
+  
+</body>
+</html>
